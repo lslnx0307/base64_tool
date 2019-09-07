@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+//    id 'com.github.johnrengelman.shadow' version '1.2.3'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+group 'com.lsl'
+version '1.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+}
+
+
+jar {
+
+    String someString = ''
+    configurations.runtime.each {someString = someString + " lib//"+it.name}
+
+    manifest {
+        attributes('Main-Class': 'Swing')
+        attributes 'Class-Path': someString
+    }
+
+}
